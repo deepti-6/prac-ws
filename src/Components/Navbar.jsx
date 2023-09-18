@@ -1,6 +1,5 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 
 const Navbar = () => {
   // State to track the visibility of the mobile menu
@@ -10,66 +9,94 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
-  
+
   return (
-    <>
-        <div className="bg-white lg:pb-12">
-      <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-        <header className="flex items-center justify-between py-4 md:py-8">
-          <Link to="/" className="text-black-800 inline-flex items-center gap-2.5 text-2xl font-bold md:text-3xl" aria-label="logo">
-            <svg width="95" height="94" viewBox="0 0 95 94" className="h-auto w-6 text-indigo-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M96 0V47L48 94H0V47L48 0H96Z" />
-            </svg>
-
-            Flowrift
-          </Link>
-
-          <nav className="hidden gap-12 lg:flex">
-            <Link to="/" className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">Home</Link>
-          
-            <Link to="/about" className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">About</Link>
-          </nav>
-
-          <div className="-ml-8 hidden flex-col gap-2.5 sm:flex-row sm:justify-center lg:flex lg:justify-start">
-
-            <Link to="/contact" className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">Contact</Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
+    <nav className="bg-white border-gray-200">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <Link to="/" className="flex items-center">
+          <img
+            src="https://flowbite.com/docs/images/logo.svg"
+            className="h-8 mr-3"
+            alt="Flowbite Logo"
+          />
+          <span className="self-center text-2xl font-semibold whitespace-nowrap">
+            Flowbite
+          </span>
+        </Link>
+        <div className="flex md:order-2">
+          <Link to="/contact">
+            <button
               type="button"
-              className="inline-flex items-center gap-2 rounded-lg bg-gray-200 px-2.5 py-2 text-sm font-semibold text-gray-500 ring-indigo-300 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base lg:hidden"
-              onClick={toggleMobileMenu} // Add click event handler
+              className="text-white md:text-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 font-semibold"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-              </svg>
-              Menu
+              Contact
             </button>
-
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-              <div className="lg:hidden">
-                <ul className="mt-4 text-center">
-                  <li className="mb-3">
-                    <Link to="/" className="block text-lg font-semibold text-gray-600 hover:text-indigo-500 active:text-indigo-700">Home</Link>
-                  </li>
-                  <li className="mb-3">
-                    <Link to="/about" className="block text-lg font-semibold text-gray-600 hover:text-indigo-500 active:text-indigo-700">About</Link>
-                  </li>
-                  <li>
-                    <Link to="/contact" className="block text-lg font-semibold text-white bg-indigo-500 py-2 px-4 rounded-full hover:bg-indigo-600 active:bg-indigo-700 md:text-base">Contact</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
-        </header>
-
-      
+          </Link>
+          <button
+            onClick={toggleMobileMenu}
+            type="button"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            aria-controls="navbar-cta"
+            aria-expanded={isMobileMenuOpen ? 'true' : 'false'}
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg
+              className="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+        </div>
+        {/* Move "Home" and "About" links outside of the mobile menu */}
+        <ul className="hidden md:flex space-x-8">
+          <li>
+            <Link to="/" className="text-gray-900 text-lg hover:text-blue-700 font-semibold">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="text-gray-900 text-lg hover:text-blue-700 font-semibold">
+              About
+            </Link>
+          </li>
+        </ul>
       </div>
-    </div>
-    </>
-  )
-}
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="items-center justify-between w-full md:hidden" id="navbar-cta">
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
+            <li>
+              <Link
+                to="/"
+                className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 font-semibold"
+                aria-current="page"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 font-semibold"
+              >
+                About
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
+    </nav>
+  );
+};
 
-export default Navbar
+export default Navbar;
